@@ -18,13 +18,9 @@ import com.ltp.gradesubmission.entity.Student;
 @RequestMapping("/student")
 public class StudentController {
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Student>> getStudents() {
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
+    
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable long id) {
+    public ResponseEntity<Student> getStudent(@PathVariable Long id) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -34,7 +30,14 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteContact(@PathVariable long id) {
+    public ResponseEntity<HttpStatus> deleteStudent(@PathVariable Long id) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Student>> getStudents() {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }
