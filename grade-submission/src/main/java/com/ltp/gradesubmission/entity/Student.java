@@ -14,16 +14,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "student")
 public class Student {
@@ -44,5 +40,5 @@ public class Student {
     @JsonIgnore
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Grade> grades;
-
+    
 }

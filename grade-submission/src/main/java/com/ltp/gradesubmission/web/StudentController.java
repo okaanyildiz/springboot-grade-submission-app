@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.service.StudentService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @RestController
 @RequestMapping("/student")
 public class StudentController {
 
     @Autowired
     StudentService studentService;
-
+    
     @GetMapping("/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id) {
         return new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
@@ -43,5 +46,6 @@ public class StudentController {
     public ResponseEntity<List<Student>> getStudents() {
         return new ResponseEntity<>(studentService.getStudents(), HttpStatus.OK);
     }
+
 
 }
