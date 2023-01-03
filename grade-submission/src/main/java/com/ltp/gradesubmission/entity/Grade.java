@@ -9,6 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "grade")
 public class Grade {
@@ -24,30 +29,9 @@ public class Grade {
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    private Course course;
 
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getScore() {
-        return this.score;
-    }
-
-    public void setScore(String score) {
-        this.score = score;
-    }
-
-    public Student getStudent() {
-        return this.student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-    
 
 }
