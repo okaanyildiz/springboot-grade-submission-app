@@ -6,21 +6,20 @@ import java.util.Set;
 
 import com.ltp.gradesubmission.entity.Course;
 import com.ltp.gradesubmission.entity.Student;
-import com.ltp.gradesubmission.exception.CourseNotFoundException;
+import com.ltp.gradesubmission.exception.EntityNotFoundException;
 import com.ltp.gradesubmission.repository.CourseRepository;
 import com.ltp.gradesubmission.repository.StudentRepository;
 
 import lombok.AllArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
 public class CourseServiceImpl implements CourseService {
 
-    CourseRepository courseRepository;
-    StudentRepository studentRepository;
-
+    private CourseRepository courseRepository;
+    private StudentRepository studentRepository;
+    
     @Override
     public Course getCourse(Long id) {
         Optional<Course> course = courseRepository.findById(id);
@@ -33,20 +32,13 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void deleteCourse(Long id) {
-        courseRepository.deleteById(id);
+    public void deleteCourse(Long id) {  
+        courseRepository.deleteById(id);      
     }
 
     @Override
     public List<Course> getCourses() {
-        return (List<Course>) courseRepository.findAll();
-    }
-
-    static Course unwrapCourse(Optional<Course> entity, Long id) {
-        if (entity.isPresent())
-            return entity.get();
-        else
-            throw new CourseNotFoundException(id);
+        return (List<Course>)courseRepository.findAll();
     }
 
     @Override
@@ -63,5 +55,11 @@ public class CourseServiceImpl implements CourseService {
         Course course = getCourse(id);
         return course.getStudents();
     }
+
+    static Course unwrapCourse(Optional<Course> entity, Long id) {
+        if (entity.isPresent()) return entity.get();
+        else throw new EntityNotFoundException(id, Course.class);
+    }
+
 
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import com.ltp.gradesubmission.entity.Course;
 import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.service.CourseService;
@@ -32,7 +34,7 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
+    public ResponseEntity<Course> saveCourse(@Valid @RequestBody Course course) {
         return new ResponseEntity<>(courseService.saveCourse(course), HttpStatus.CREATED);
     }
 
@@ -56,4 +58,5 @@ public class CourseController {
     public ResponseEntity<Set<Student>> getEnrolledStudents(@PathVariable Long id) {
         return new ResponseEntity<>(courseService.getEnrolledStudents(id), HttpStatus.OK);
     }
+
 }
